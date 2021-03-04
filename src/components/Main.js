@@ -3,9 +3,9 @@ import api from '../utils/api';
 import Card from './Card';
 
 function Main(props) {
-  const [userName, setUserName] = React.useState([]);
-  const [userDescription, setUserDescription] = React.useState([]);
-  const [userAvatar, setUserAvatar] = React.useState([]);
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setcards] = React.useState([]);
 
   React.useEffect(() => {
@@ -17,12 +17,12 @@ function Main(props) {
         setcards(cardsFromServer);
       })
       .catch(err => console.log(err));
-  }, [userName, userDescription, userAvatar]); 
+  }, []); 
 
   return (
     <main className='content'>
       <section className='profile'>
-        <div className='profile__avatar' style={{ backgroundImage: `url(${userAvatar})` }} onClick={props.onEditAvatar}></div>
+        <div className='profile__avatar' style={{backgroundImage: `url(${userAvatar})`}} onClick={props.onEditAvatar}></div>
         <div className='profile__info'>
           <div className='profile__info-container'>
             <h1 className='profile__full-name'>{userName}</h1>
