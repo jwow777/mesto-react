@@ -1,16 +1,20 @@
-import React from 'react';
-import './App.css';
+import {useEffect, useState} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import api from '../utils/api';
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(false);
+  const [currentUser, setcurrentUser] = useState(false);
+
+  useEffect(() => api.getUserInfo().then(res => setcurrentUser(res)).catch(err => console.log(err)), [])
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -32,7 +36,7 @@ function App() {
   }
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Header/>
       <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={setSelectedCard}/>
       <Footer/>
@@ -54,7 +58,7 @@ function App() {
       </PopupWithForm>
       <PopupWithForm id='3' name='delete' title='Вы уверены?' submit='Да'/>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
