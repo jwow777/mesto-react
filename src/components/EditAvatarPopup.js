@@ -1,13 +1,8 @@
-import {useState, useRef} from 'react';
+import {useRef} from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
   const inputRef = useRef();
-  const [avatar, setAvatar] = useState('');
-
-  function handleChangeAvatar(e) {
-    setAvatar(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,8 +21,6 @@ function EditAvatarPopup(props) {
         required
         autoComplete='off'
         ref={inputRef}
-        value={avatar || ''}
-        onChange={handleChangeAvatar}
       />
       <span className='avatar-input-error popup__input-error'></span>
     </PopupWithForm>
