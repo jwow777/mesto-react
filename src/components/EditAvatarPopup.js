@@ -8,21 +8,21 @@ function EditAvatarPopup(props) {
     e.preventDefault();
     props.onUpdateAvatar({avatar: inputRef.current.value});
     props.onClose();
+    e.target.reset();
   }
 
   return (
     <PopupWithForm name='avatar' title='Обновить аватар' submit='Сохранить' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
       <input
         type='url'
-        id='avatar-input'
         name='avatar'
-        className='popup__input popup__input_type_avatar'
+        className='popup__input'
         placeholder='Ссылка на изображение'
         required
         autoComplete='off'
         ref={inputRef}
       />
-      <span className='avatar-input-error popup__input-error'></span>
+      <span className='popup__input-error'></span>
     </PopupWithForm>
   );
 }

@@ -17,15 +17,16 @@ function AddPlacePopup(props) {
     e.preventDefault();
     props.onAddPlace({name, link});
     props.onClose();
+    setName('');
+    setLink('');
   }
 
   return (
     <PopupWithForm name='add' title='Новое место' submit='Создать' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
       <input 
-        type='text' 
-        id='title-input' 
+        type='text'
         name='name' 
-        className='popup__input popup__input_type_title' 
+        className='popup__input' 
         placeholder='Название' 
         required 
         minLength='2' 
@@ -34,19 +35,18 @@ function AddPlacePopup(props) {
         value={name || ''}
         onChange={handleChangeName}
       />
-      <span className='title-input-error popup__input-error'></span>
+      <span className='popup__input-error'></span>
       <input 
-        type='url' 
-        id='link-input' 
+        type='url'
         name='link' 
-        className='popup__input popup__input_type_link' 
+        className='popup__input' 
         placeholder='Ссылка на изображение' 
         required 
         autoComplete='off' 
         value={link || ''}
         onChange={handleChangeLink}
       />
-      <span className='link-input-error popup__input-error'></span>
+      <span className='popup__input-error'></span>
     </PopupWithForm>
   )
 }

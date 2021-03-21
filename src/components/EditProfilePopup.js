@@ -24,15 +24,16 @@ function EditProfilePopup(props) {
     e.preventDefault();
     props.onUpdateUser({name, about:description});
     props.onClose();
+    setName('');
+    setDescription('');
   }
 
   return (
     <PopupWithForm name='edit' title='Редактировать профиль' submit='Сохранить' isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
       <input
         type='text'
-        id='name-input'
         name='name'
-        className='popup__input popup__input_type_name'
+        className='popup__input'
         placeholder='Имя'
         required
         minLength='2'
@@ -41,12 +42,11 @@ function EditProfilePopup(props) {
         value={name || ''}
         onChange={handleChangeName}
       />
-      <span className="name-input-error popup__input-error"></span>
+      <span className="popup__input-error"></span>
       <input
         type='text'
-        id='desc-input'
         name='about'
-        className='popup__input popup__input_type_desc'
+        className='popup__input'
         placeholder='О себе'
         required
         minLength='2'
@@ -55,7 +55,7 @@ function EditProfilePopup(props) {
         value={description || ''}
         onChange={handleChangeDescription}
       />
-      <span className='desc-input-error popup__input-error'></span>
+      <span className='popup__input-error'></span>
     </PopupWithForm>
   );
 }
